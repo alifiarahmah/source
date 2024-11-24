@@ -25,7 +25,7 @@ plt.style.use('default')
 figsize(15, 5)
 
 # Always display all the columns
-pd.set_option('display.line_width', 5000)
+pd.set_option('display.width', 5000)
 pd.set_option('display.max_columns', 60)
 ```
 
@@ -767,15 +767,13 @@ Output:
 This looks bad to me. Let's set these to nan.
 
 ```python
-zero_zips = requests['Incident Zip'] == '00000'
-requests['Incident Zip'][zero_zips] = np.nan
+requests.loc[requests['Incident Zip'] == '00000', 'Incident Zip'] = np.nan
 ```
 
 Great. Let's see where we are now:
 
 ```python
 unique_zips = requests['Incident Zip'].unique()
-unique_zips.sort()
 unique_zips
 ```
 
@@ -829,7 +827,7 @@ zips = requests['Incident Zip']
 is_close = zips.str.startswith('0') | zips.str.startswith('1')
 # There are a bunch of NaNs, but we're not interested in them right now, so we'll say they're True
 is_far = ~(is_close.fillna(True).astype(bool))
-zips[is_far]
+zips.loc[is_far].dropna()
 ```
 
 Output:
@@ -955,7 +953,7 @@ Output:
 Okay, there really are requests coming from LA and Houston! Good to know. Filtering by zip code is probably a bad way to handle this -- we should really be looking at the city instead.
 
 ```python
-requests['City'].str.upper().value_counts()
+requests[is_far][['Incident Zip', 'Descriptor', 'City']].dropna().sort_values('Incident Zip')
 ```
 
 Output:
