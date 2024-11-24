@@ -9,7 +9,7 @@ prev: /pandas-cookbook/chapter5
 title: Chapter 6 - String Operations
 weight: 35
 url: /pandas-cookbook/chapter6
-description: String Operations in pandas. Using resampling and plotting temperature. 
+description: String Operations in pandas. Using resampling and plotting temperature.
 keywords:
   - pandas
   - string
@@ -23,7 +23,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-pd.set_option('display.mpl_style', 'default')
+plt.style.use('default')
 plt.rcParams['figure.figsize'] = (15, 3)
 plt.rcParams['font.family'] = 'sans-serif'
 ```

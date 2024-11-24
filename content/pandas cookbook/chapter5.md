@@ -24,7 +24,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-pd.set_option('display.mpl_style', 'default')
+plt.style.use('default')
 plt.rcParams['figure.figsize'] = (15, 3)
 plt.rcParams['font.family'] = 'sans-serif'
 ```
@@ -1621,11 +1621,11 @@ I had to write '\xb0' for that degree character °. Let's fix up the columns. We
 
 ```python
 weather_mar2012.columns = [
-    u'Year', u'Month', u'Day', u'Time', u'Data Quality', u'Temp (C)', 
-    u'Temp Flag', u'Dew Point Temp (C)', u'Dew Point Temp Flag', 
-    u'Rel Hum (%)', u'Rel Hum Flag', u'Wind Dir (10s deg)', u'Wind Dir Flag', 
+    u'Year', u'Month', u'Day', u'Time', u'Data Quality', u'Temp (C)',
+    u'Temp Flag', u'Dew Point Temp (C)', u'Dew Point Temp Flag',
+    u'Rel Hum (%)', u'Rel Hum Flag', u'Wind Dir (10s deg)', u'Wind Dir Flag',
     u'Wind Spd (km/h)', u'Wind Spd Flag', u'Visibility (km)', u'Visibility Flag',
-    u'Stn Press (kPa)', u'Stn Press Flag', u'Hmdx', u'Hmdx Flag', u'Wind Chill', 
+    u'Stn Press (kPa)', u'Stn Press Flag', u'Hmdx', u'Hmdx Flag', u'Wind Chill',
     u'Wind Chill Flag', u'Weather']
 ```
 
@@ -1866,7 +1866,7 @@ temperatures.groupby('Hour').aggregate(np.median).plot()
 Output:
 
 ```bash
-Date/Time                    
+Date/Time
 2012-03-01 00:00:00      -5.5
 2012-03-01 01:00:00      -5.7
 2012-03-01 02:00:00      -5.4

@@ -21,12 +21,12 @@ keywords:
 import pandas as pd
 
 # Make the graphs a bit prettier, and bigger
-pd.set_option('display.mpl_style', 'default')
+plt.style.use('default')
 figsize(15, 5)
 
 # Always display all the columns
-pd.set_option('display.line_width', 5000) 
-pd.set_option('display.max_columns', 60) 
+pd.set_option('display.line_width', 5000)
+pd.set_option('display.max_columns', 60)
 ```
 
 One of the main problems with messy data is: how do you know if it's messy or not?
@@ -62,7 +62,7 @@ Some of the problems:
  - There are nans
  - Some of the zip codes are 29616-0759 or 83
  - There are some N/A values that pandas didn't recognize, like 'N/A' and 'NO CLUE'
- 
+
 What we can do:
 
  - Normalize 'N/A' and 'NO CLUE' into regular nan values
@@ -1003,20 +1003,20 @@ Here's what we ended up doing to clean up our zip codes, all together:
 
 ```python
 na_values = ['NO CLUE', 'N/A', '0']
-requests = pd.read_csv('311-service-requests.csv', 
-                       na_values=na_values, 
+requests = pd.read_csv('311-service-requests.csv',
+                       na_values=na_values,
                        dtype={'Incident Zip': str})
 
 def fix_zip_codes(zips):
-    # Truncate everything to length 5 
+    # Truncate everything to length 5
     zips = zips.str.slice(0, 5)
-    
+
     # Set 00000 zip codes to nan
     zero_zips = zips == '00000'
     zips[zero_zips] = np.nan
-    
+
     return zips
-    
+
 requests['Incident Zip'] = fix_zip_codes(requests['Incident Zip'])
 requests['Incident Zip'].unique()
 ```
